@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Green Habit Tracker</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #d8f3dc, #b7e4c7);
+    color: #1b4332;
+    min-height: 100vh;
+    padding: 30px 15px;
+}
+
+.container {
+    max-width: 700px;
+    margin: auto;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.header h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.header p {
+    color: #52796f;
+    font-size: 16px;
+}
+
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+
+.card h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.habit {
+    display: flex;
+    align-items: center;
+    background: #f1f8f3;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.habit:hover {
+    background: #d8f3dc;
+    transform: translateY(-2px);
+}
+
+.habit input {
+    width: 18px;
+    height: 18px;
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    background: #2d6a4f;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1b4332;
+}
+
+.result {
+    margin-top: 25px;
+    padding: 20px;
+    background: #d8f3dc;
+    border-radius: 12px;
+    text-align: center;
+    display: none;
+}
+
+.score {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 10px;
+}
+
+.tip {
+    margin-top: 20px;
+    padding: 18px;
+    background: white;
+    border-radius: 12px;
+    text-align: center;
+}
+
+footer {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 13px;
+    color: #52796f;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>🌱 Green Habit Tracker</h1>
+
+        <p>
+            Track your daily sustainable habits and contribute
+            towards a greener future.
+        </p>
+    </div>
+
+    <div class="card">
+
+        <h2>Today's Green Habits ♻️</h2>
+
+        <label class="habit">
+            <input type="checkbox" class="habitCheck">
+            💧 I saved water today
+        </label>
+
+        <label class="habit">
+            <input type="checkbox" class="habitCheck">
+            💡 I saved electricity
+        </label>
+
+        <label class="habit">
+            <input type="checkbox" class="habitCheck">
+            🚌 I used public transport or walked
+        </label>
+
+        <label class="habit">
+            <input type="checkbox" class="habitCheck">
+            🥤 I used a reusable bottle
+        </label>
+
+        <label class="habit">
+            <input type="checkbox" class="habitCheck">
+            ♻️ I segregated waste properly
+        </label>
+
+        <label class="habit">
+            <input type="checkbox" class="habitCheck">
+            🌱 I took care of a plant
+        </label>
+
+        <button onclick="calculateScore()">
+            Calculate My Sustainability Score
+        </button>
+
+        <div class="result" id="result">
+
+            <h3>Your Sustainability Score</h3>
+
+            <div class="score" id="score"></div>
+
+            <p id="message"></p>
+
+        </div>
+
+    </div>
+
+    <div class="tip">
+
+        💚 <strong>Eco Tip:</strong><br><br>
+
+        Small sustainable actions such as saving water,
+        reducing electricity consumption and segregating
+        waste can contribute to a greener environment.
+
+    </div>
+
+    <footer>
+
+        Green Habit Tracker | Sustainability Awareness Project
+
+    </footer>
+
+</div>
+
+
+<script>
+
+function calculateScore() {
+
+    let habits = document.querySelectorAll(".habitCheck");
+
+    let completed = 0;
+
+    habits.forEach(function(habit) {
+
+        if (habit.checked) {
+            completed++;
+        }
+
+    });
+
+    let total = habits.length;
+
+    let score = Math.round((completed / total) * 100);
+
+    let message;
+
+    if (score === 100) {
+
+        message = "🌍 Excellent! You completed all green habits today!";
+
+    } else if (score >= 70) {
+
+        message = "🌱 Great work! You are making sustainable choices.";
+
+    } else if (score >= 40) {
+
+        message = "♻️ Good start! Try to adopt more sustainable habits.";
+
+    } else {
+
+        message = "💚 Every small action matters. Start with one green habit today!";
+
+    }
+
+    document.getElementById("score").innerHTML =
+        score + "%";
+
+    document.getElementById("message").innerHTML =
+        "You completed " + completed + " out of " + total +
+        " green habits.<br><br>" + message;
+
+    document.getElementById("result").style.display = "block";
+
+}
+
+</script>
+
+</body>
+</html>
